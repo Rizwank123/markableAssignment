@@ -67,6 +67,7 @@ Follow these steps to set up the project locally:
 
    ```bash
     go run github.com/markable/cmd
+![Alt text](img.png)
     
 ## License
 This project is licensed under the MIT License
