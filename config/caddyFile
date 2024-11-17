@@ -1,0 +1,11 @@
+local.api.markable.co {
+    log {
+        output stdout
+    }
+    tls /Users/macBook/.certs/local.api.markable.co.pem /Users/macBook/.certs/local.api.markable.co-key.pem
+
+    reverse_proxy http://local.api.markable.co:7700 {
+        header_up X-Marotagem true
+        header_up Host "local.api.markable.co"
+    }
+
