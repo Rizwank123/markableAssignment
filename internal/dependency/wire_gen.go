@@ -33,7 +33,7 @@ func NewDatabaseConfig(cfg config.MarkAbleConfig) (*pgxpool.Pool, error) {
 	return pool, nil
 }
 
-func NewMarkableApi(cfg config.MarkAbleConfig, db *pgxpool.Pool) (api.MarkAbleApi, error) {
+func NewMarkableApi(cfg config.MarkAbleConfig, db *pgxpool.Pool) (*api.MarkAbleApi, error) {
 	patientRepository := repository.NewPatientRepository(db)
 	patientService := service.NewPatientService(patientRepository)
 	patientController := controller.NewPatientController(patientService)

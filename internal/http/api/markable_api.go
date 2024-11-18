@@ -10,8 +10,8 @@ import (
 
 type MarkAbleApi struct {
 	cfg               config.MarkAbleConfig
-	patientController controller.PatientController
-	userController    controller.UserController
+	PatientController controller.PatientController
+	UserController    controller.UserController
 }
 
 // NewMarkableApi creates a new MarkableApi instance
@@ -29,11 +29,11 @@ type MarkAbleApi struct {
 //	@securityDefinitions.apiKey	JWT
 //	@in							header
 //	@name						Authorization
-func NewMarkableApi(cfg config.MarkAbleConfig, pc controller.PatientController, uc controller.UserController) MarkAbleApi {
-	return MarkAbleApi{
+func NewMarkableApi(cfg config.MarkAbleConfig, pc controller.PatientController, uc controller.UserController) *MarkAbleApi {
+	return &MarkAbleApi{
 		cfg:               cfg,
-		patientController: pc,
-		userController:    uc,
+		PatientController: pc,
+		UserController:    uc,
 	}
 }
 
@@ -43,17 +43,17 @@ func (b MarkAbleApi) SetupRoutes(e *echo.Echo) {
 	auth := echojwt.JWT([]byte(b.cfg.AuthSecret))
 
 	userApi := apiV1.Group("/users")
-	userApi.POST("/login", b.userController.Login)
-	userApi.POST("", b.userController.RegisterUser)
+	userApi.POST("/login", b.UserController.Login)
+	userApi.POST("", b.UserController.RegisterUser)
 	secureApi := apiV1.Group("/users")
 	secureApi.Use(auth)
-	secureApi.GET("/:id", b.userController.FindByID)
+	secureApi.GET("/:id", b.UserController.FindByID)
 
 	patientApi := apiV1.Group("/patients")
-	patientApi.GET("", b.patientController.FindAllPatients)
-	patientApi.GET("/:id", b.patientController.FindPatientById)
-	patientApi.POST("", b.patientController.CreatePatient)
-	patientApi.PUT("/:id", b.patientController.UpdatePatient)
-	patientApi.DELETE("/:id", b.patientController.DeletePatient)
+	patientApi.GET("", b.PatientController.FindAllPatients)
+	patientApi.GET("/:id", b.PatientController.FindPatientById)
+	patientApi.POST("", b.PatientController.CreatePatient)
+	patientApi.PUT("/:id", b.PatientController.UpdatePatient)
+	patientApi.DELETE("/:id", b.PatientController.DeletePatient)
 
 }

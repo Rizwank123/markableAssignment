@@ -30,7 +30,7 @@ func NewDatabaseConfig(cfg config.MarkAbleConfig) (*pgxpool.Pool, error) {
 	return &pgxpool.Pool{}, nil
 }
 
-func NewMarkableApi(cfg config.MarkAbleConfig, db *pgxpool.Pool) (api.MarkAbleApi, error) {
+func NewMarkableApi(cfg config.MarkAbleConfig, db *pgxpool.Pool) (*api.MarkAbleApi, error) {
 	wire.Build(
 		util.NewAppUtil,
 		security.NewJwtSecurityManager,
@@ -43,5 +43,5 @@ func NewMarkableApi(cfg config.MarkAbleConfig, db *pgxpool.Pool) (api.MarkAbleAp
 		controller.NewPatientController,
 		api.NewMarkableApi,
 	)
-	return api.MarkAbleApi{}, nil
+	return &api.MarkAbleApi{}, nil
 }

@@ -9,6 +9,14 @@ migrate:
 	@echo "Running migrations..."
 	sh script/migration.sh
 
+# Run pretest script
+pretest:
+	sh script/test-helper.sh
+
+# Migrate Tests
+migrate-test:
+	@echo "Running migrations for tests..."
+	sh script/migrate-tests.sh
 # Generate API documentation
 doc:
 	@echo "Generating swagger docs..."
