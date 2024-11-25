@@ -61,7 +61,7 @@ definitions:
         - $ref: '#/definitions/github_com_markable_internal_domain.UserRole'
         example: RECEPTIONIST
       user_name:
-        example: "+919984778491"
+        example: "+919876543210"
         type: string
     type: object
   ForbiddenAccessError:
@@ -83,8 +83,8 @@ definitions:
     properties:
       password:
         type: string
-      user_name:
-        example: +919984778491 or example
+      username:
+        example: "+919876543210"
         type: string
     type: object
   LoginOutput:
@@ -183,17 +183,19 @@ definitions:
       updated_at:
         type: string
       user_name:
-        example: "+919984778491"
+        example: "+919876543210"
         type: string
     type: object
   github_com_markable_internal_domain.UserRole:
     enum:
     - DOCTOR
     - RECEPTIONIST
+    - NURSE
     type: string
     x-enum-varnames:
     - UserRoleDoctor
     - UserRoleRECEPTIONIST
+    - UserRoleNURSE
 host: localhost:7700
 info:
   contact:

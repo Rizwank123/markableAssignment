@@ -19,7 +19,11 @@ func NewPatientService(pr domain.PatientRepository) domain.PatientService {
 }
 
 // Create implements domain.PatientService.
-func (s *patientServiceImpl) Create(in domain.CreatePatientInput) (result domain.Patient, err error) {
+func (s *patientServiceImpl) Create(in domain.CreatePatientInput, role string) (result domain.Patient, err error) {
+	if role == string(domain.UserRoleNURSE) {
+		err = domain.UnauthorizedError{Code: domain.ErrorCodeUNAUTHORIZED, Message: domain.MessageNOT_ALLOWED_FOR_OPERATION}
+		return result, err
+	}
 	result = domain.Patient{
 		FirstName: &in.FirstName,
 		LastName:  &in.LastName,
@@ -38,7 +42,12 @@ func (s *patientServiceImpl) Create(in domain.CreatePatientInput) (result domain
 }
 
 // Delete implements domain.PatientService.
-func (s patientServiceImpl) Delete(id uuid.UUID) (err error) {
+func (s patientServiceImpl) Delete(id uuid.UUID, role string) (err error) {
+	if role == string(domain.UserRoleNURSE) {
+		err = domain.UnauthorizedError{Code: domain.ErrorCodeUNAUTHORIZED, Message: domain.MessageNOT_ALLOWED_FOR_OPERATION}
+		return err
+	}
+
 	result, err := s.pr.FindByID(context.Background(), id)
 	if err != nil {
 		return err
@@ -61,7 +70,11 @@ func (s *patientServiceImpl) FindByID(id uuid.UUID) (result domain.Patient, err 
 }
 
 // Update implements domain.PatientService.
-func (s *patientServiceImpl) Update(id uuid.UUID, in domain.UpdatePatientInput) (result domain.Patient, err error) {
+func (s *patientServiceImpl) Update(id uuid.UUID, in domain.UpdatePatientInput, role string) (result domain.Patient, err error) {
+	if role == string(domain.UserRoleNURSE) {
+		err = domain.UnauthorizedError{Code: domain.ErrorCodeUNAUTHORIZED, Message: domain.MessageNOT_ALLOWED_FOR_OPERATION}
+		return result, err
+	}
 	result, err = s.pr.FindByID(context.Background(), id)
 	if err != nil {
 		return result, err

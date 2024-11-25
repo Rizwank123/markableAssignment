@@ -14,7 +14,7 @@ type (
 	// User defines the module for User
 	User struct {
 		Base
-		UserName string  `db:"user_name" json:"user_name,omitempty" example:"+919984778491"`
+		UserName string  `db:"user_name" json:"user_name,omitempty" example:"+919876543210"`
 		Password *string `db:"password" json:"-"`
 		Role     string  `db:"role" json:"role,omitempty"  example:"RECEPTIONIST"`
 		FullName string  `db:"full_name" json:"full_name,omitempty" example:"John Doe"`
@@ -26,7 +26,7 @@ type (
 	// CreateUserInput define the module for CreateUser
 	RegisterUserInput struct {
 		FullName string   `json:"full_name" example:"John Doe"`
-		UserName string   `json:"user_name" example:"+919984778491"`
+		UserName string   `json:"user_name" example:"+919876543210"`
 		Role     UserRole `json:"role" example:"RECEPTIONIST"`
 		Password string   `json:"password" example:"password123"`
 	} // @name CreateUserInput
@@ -36,7 +36,7 @@ type (
 	} // @name UpdateUserInput
 	// LoginInput  define the module for the LoginInput
 	LoginInput struct {
-		UserName string `json:"user_name" example:"+919984778491 or example"`
+		UserName string `json:"username" example:"+919876543210"`
 		Password string `json:"password"`
 	} // @name LoginInput
 	// LoginOutput define the module for the LoginOutput
@@ -82,4 +82,5 @@ type (
 const (
 	UserRoleDoctor       UserRole = "DOCTOR"
 	UserRoleRECEPTIONIST UserRole = "RECEPTIONIST"
+	UserRoleNURSE        UserRole = "NURSE"
 )

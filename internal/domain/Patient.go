@@ -63,10 +63,10 @@ type (
 		// FindAll returns all patients
 		FindAll() (result []Patient, err error)
 		// Create creates a new patient
-		Create(in CreatePatientInput) (result Patient, err error)
+		Create(in CreatePatientInput, role string) (result Patient, err error)
 		// Update updates a patient
-		Update(id uuid.UUID, in UpdatePatientInput) (result Patient, err error)
+		Update(id uuid.UUID, in UpdatePatientInput, role string) (result Patient, err error)
 		// Delete deletes a patient
-		Delete(id uuid.UUID) (err error)
+		Delete(id uuid.UUID, role string) (err error)
 	} // @name PatientService
 )

@@ -7,8 +7,8 @@ import (
 
 // TokenMetadata represents the metadata in the auth token
 type TokenMetadata struct {
-	UserID         string `json:"user_id"`
-	Role           string `json:"role"`
+	UserID string `json:"user_id"`
+	Role   string `json:"role"`
 }
 
 // Manager defines the methods that a security manager should implement

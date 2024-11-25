@@ -726,7 +726,7 @@ const docTemplate = `{
                 },
                 "user_name": {
                     "type": "string",
-                    "example": "+919984778491"
+                    "example": "+919876543210"
                 }
             }
         },
@@ -758,9 +758,9 @@ const docTemplate = `{
                 "password": {
                     "type": "string"
                 },
-                "user_name": {
+                "username": {
                     "type": "string",
-                    "example": "+919984778491 or example"
+                    "example": "+919876543210"
                 }
             }
         },
@@ -901,7 +901,7 @@ const docTemplate = `{
                 },
                 "user_name": {
                     "type": "string",
-                    "example": "+919984778491"
+                    "example": "+919876543210"
                 }
             }
         },
@@ -909,11 +909,13 @@ const docTemplate = `{
             "type": "string",
             "enum": [
                 "DOCTOR",
-                "RECEPTIONIST"
+                "RECEPTIONIST",
+                "NURSE"
             ],
             "x-enum-varnames": [
                 "UserRoleDoctor",
-                "UserRoleRECEPTIONIST"
+                "UserRoleRECEPTIONIST",
+                "UserRoleNURSE"
             ]
         }
     },

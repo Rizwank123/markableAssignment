@@ -85,15 +85,13 @@ const (
 	ErrorCodeINTERNAL_SERVER_ERROR = "INTERNAL_SERVER_ERROR"
 	ErrorCodeUNAUTHORIZED          = "UNAUTHORIZED"
 	ErrorCodeFORBIDDEN_ACCESS      = "FORBIDDEN_ACCESS"
-
-	ErrorCodeUSER_EXISTS         = "MOBILE_NUMBER_EXISTS"
-	ErrorCodePATIENT_NAME_EXISTS = "PERSONNEL_NAME_EXISTS"
 )
 
 const (
-	MessageVALIDATIONFAILED  = "Validation failed for some or all of the fields in the request"
-	MessageUSERNAMEEREXISTS  = "User with this mobile number already exists"
-	MessagePATIENTNAMEEXISTS = "User with this name is already registered in the system"
+	MessageVALIDATIONFAILED          = "Validation failed for some or all of the fields in the request"
+	MessageUSERNAMEEREXISTS          = "User with this mobile number already exists"
+	MessagePATIENTNAMEEXISTS         = "User with this name is already registered in the system"
+	MessageNOT_ALLOWED_FOR_OPERATION = "You are not allowed to perform this operation please contact with admin"
 
 	MessageUNAUTHORIZEDACCESS = "You are not authorized to access this resource"
 	MessageFORBIDDENACCESS    = "You are forbidden from accessing this resource"

@@ -50,6 +50,7 @@ func (b MarkAbleApi) SetupRoutes(e *echo.Echo) {
 	secureApi.GET("/:id", b.UserController.FindByID)
 
 	patientApi := apiV1.Group("/patients")
+	patientApi.Use(auth)
 	patientApi.GET("", b.PatientController.FindAllPatients)
 	patientApi.GET("/:id", b.PatientController.FindPatientById)
 	patientApi.POST("", b.PatientController.CreatePatient)

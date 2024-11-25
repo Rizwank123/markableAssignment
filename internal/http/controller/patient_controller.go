@@ -8,6 +8,7 @@ import (
 
 	"github.com/markable/internal/domain"
 	"github.com/markable/internal/http/transport"
+	"github.com/markable/internal/pkg/security"
 )
 
 type PatientController struct {
@@ -91,7 +92,13 @@ func (c PatientController) FindAllPatients(ctx echo.Context) error {
 func (c PatientController) CreatePatient(ctx echo.Context) error {
 	var in domain.CreatePatientInput
 	transport.DecodeAndValidateRequestBody(ctx, &in)
-	result, err := c.ps.Create(in)
+	// Get the user ID from the claims
+	claims := security.GetClaimsForContext(ctx)
+	if claims["user_id"] == nil {
+		return domain.UserError{Message: "Failed to find user ID from JWT token"}
+	}
+	role := claims["role"].(string)
+	result, err := c.ps.Create(in, role)
 	if err != nil {
 		return err
 	}
@@ -124,7 +131,13 @@ func (c PatientController) UpdatePatient(ctx echo.Context) error {
 	}
 	var in domain.UpdatePatientInput
 	transport.DecodeAndValidateRequestBody(ctx, &in)
-	result, err := c.ps.Update(id, in)
+	// Get the user ID from the claims
+	claims := security.GetClaimsForContext(ctx)
+	if claims["user_id"] == nil {
+		return domain.UserError{Message: "Failed to find user ID from JWT token"}
+	}
+	role := claims["role"].(string)
+	result, err := c.ps.Update(id, in, role)
 	if err != nil {
 		return err
 	}
@@ -154,7 +167,13 @@ func (c PatientController) DeletePatient(ctx echo.Context) error {
 	if err != nil {
 		return err
 	}
-	err = c.ps.Delete(id)
+	// Get the user ID from the claims
+	claims := security.GetClaimsForContext(ctx)
+	if claims["user_id"] == nil {
+		return domain.UserError{Message: "Failed to find user ID from JWT token"}
+	}
+	role := claims["role"].(string)
+	err = c.ps.Delete(id, role)
 	if err != nil {
 		return err
 	}

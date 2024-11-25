@@ -4,10 +4,11 @@ import (
 	"time"
 
 	"github.com/golang-jwt/jwt/v5"
+
 	"github.com/markable/internal/pkg/config"
 )
 
-const issuer = "MarkAble"
+const issuer = "markable-app-server"
 
 // jwtSecurityManager represents the JWT security manager
 type jwtSecurityManager struct {
