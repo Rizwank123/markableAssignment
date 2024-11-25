@@ -1,76 +1,119 @@
-
 # Markable API
 
 The Markable API is a web application designed to manage patient and user data. It provides a set of RESTful APIs for user authentication, patient management, and more.
 
 ## Table of Contents
 
-- [Features](#features)
+- [Overview](#overview)
+- [Access Control](#access-control)
 - [Technologies Used](#technologies-used)
-- [Installation](#installation)
-- [Usage](#usage)
+- [Getting Started](#getting-started)
+  - [Prerequisites](#prerequisites)
+  - [Installation](#installation)
+  - [Configuration](#configuration)
 - [API Documentation](#api-documentation)
-- [Contributing](#contributing)
 - [License](#license)
-- [Contact](#contact)
 
-## Features
+## Overview
 
+The Markable API provides the following core features:
 - User authentication (login and registration)
+- Role-based access control (RBAC)
 - CRUD operations for patient records
 - Secure access to patient data using JWT
 - Swagger documentation for API endpoints
 
+## Access Control
+
+The API implements role-based access control with the following permissions:
+
+| Role          | View Patients | Create Patients | Update Patients | Delete Patients |
+|---------------|---------------|-----------------|-----------------|-----------------|
+| Doctor        | ✅            | ✅              | ✅              | ✅              |
+| Receptionist  | ✅            | ✅              | ✅              | ✅              |
+| Nurse         | ✅            | ❌              | ❌              | ❌              |
+
 ## Technologies Used
 
-- Go (Golang) for backend development
-- Echo framework for building the web server
-- PostgreSQL for database management
-- JWT for secure authentication
-- Swagger for API documentation
-- Viper for configuration management
+- **Backend Framework**: Go (Golang) with Echo framework
+- **Database**: PostgreSQL
+- **Authentication**: JWT (JSON Web Tokens)
+- **Documentation**: Swagger
+- **Configuration**: Viper
 
-## Installation
+## Getting Started
 
-Follow these steps to set up the project locally:
+### Prerequisites
+
+- Go 1.19 or higher
+- PostgreSQL
+- mkcert (for SSL certificates)
+- Caddy (for reverse proxy)
+
+### Installation
 
 1. **Clone the repository:**
-
    ```bash
    git clone https://github.com/yourusername/markable.git
-  
-2. **Setup Project:**
-
-   ```bash
    cd markable
+   ```
+
+2. **Setup Project:**
+   ```bash
    make Setup
-3. **Edit .env**
+   ```
 
-- set database username
-- set database password and database name
-- edit ``etc/hots`` add
-``
-127.0.0.1 local.api.markable.co
-``
-- install  **mkcert**
-- ``brew install mkcert`` for macos and for windows install using ``choco install mkcert``
-- open terminal run
-- ``cd .cert``
-- ``mkcert local.api.markable.co``
-- run caddy ``caddy run --config ~/Deaktop/markableAssignment/config/caddyFile``
-
-4. **Run migration**
-
+3. **Run migrations:**
    ```bash
-    make migrate
-5. **Run Server**
+   make migrate
+   ```
 
+4. **Start the server:**
    ```bash
-    go run github.com/markable/cmd
-![Alt text](img.png)
-    
+   go run github.com/markable/cmd
+   ```
+
+### Configuration
+
+1. **Environment Setup**
+   - Create and configure your `.env` file with:
+     - Database username
+     - Database password
+     - Database name
+
+2. **Local Domain Configuration**
+   - Edit `/etc/hosts` and add:
+     ```
+     127.0.0.1 local.api.markable.co
+     ```
+
+3. **SSL Certificate Setup**
+   - Install mkcert:
+     ```bash
+     # MacOS
+     brew install mkcert
+     
+     # Windows
+     choco install mkcert
+     ```
+   - Generate certificates:
+     ```bash
+     cd .cert
+     mkcert local.api.markable.co
+     ```
+
+4. **Start Caddy Server**
+   ```bash
+   caddy run --config ~/Desktop/markableAssignment/config/caddyFile
+   ```
+
+## API Documentation
+
+API documentation is available via Swagger UI when the server is running.
+Access it at: `https://local.api.markable.co/swagger/index.html`
+
 ## License
-This project is licensed under the MIT License
- 
+
+This project is licensed under the MIT License.
  
 
